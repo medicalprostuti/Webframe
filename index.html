@@ -70,19 +70,18 @@
             height: 100%;
             border: none;
             z-index: 2;
-            display: none; /* Initially hidden */
         }
     </style>
 </head>
 <body>
     <div id="webframe-container">
         <canvas id="particle-canvas"></canvas>
+        <iframe id="main-iframe" src="https://medicalprostuti.github.io/HomepageofMediQ/"></iframe>
     </div>
 
     <div id="no-internet-popup" class="full-screen-popup">
         <h1>দু:খিত!</h1>
-        <p>ইন্টারনেট সংযোগ বিচ্ছিন্ন! আবার চেষ্টা করো।
-      </p>
+        <p>ইন্টারনেট সংযোগ বিচ্ছিন্ন! আবার চেষ্টা করো।</p>
     </div>
 
     <div id="blocked-ip-popup" class="full-screen-popup">
@@ -91,7 +90,7 @@
     </div>
     <div id="vpn-blocked-popup" class="full-screen-popup">
         <h1>দু:খিত!</h1>
-        <p>অ্যাপসটি ভিপিএন সংযোগে ব্যবহারযোগ্য নয়!</p>
+        <p>অ্যাপসটি ভিপিএন সংযোগে ব্যবহারযোগ্য নয়!</p>
     </div>
     
     <div id="api-error-popup" class="full-screen-popup">
@@ -105,37 +104,23 @@
             const blockedIpPopup = document.getElementById('blocked-ip-popup');
             const vpnBlockedPopup = document.getElementById('vpn-blocked-popup');
             const apiErrorPopup = document.getElementById('api-error-popup');
-            const webframeContainer = document.getElementById('webframe-container');
-            let iframe = null;
-
+            const mainIframe = document.getElementById('main-iframe');
+            
             function showPopup(popupElement) {
+                mainIframe.style.display = 'none';
                 noInternetPopup.style.display = 'none';
                 blockedIpPopup.style.display = 'none';
                 vpnBlockedPopup.style.display = 'none';
                 apiErrorPopup.style.display = 'none';
                 
-                if (iframe) {
-                    iframe.style.display = 'none';
-                }
-
                 if (popupElement) {
                     popupElement.style.display = 'flex';
                 }
             }
 
-            // Function to check if a specific URL is reachable
-            async function checkUrlReachable(url) {
-                try {
-                    const response = await fetch(url, { method: 'HEAD', mode: 'no-cors' });
-                    return true;
-                } catch (e) {
-                    return false;
-                }
-            }
-
             async function initialChecks() {
                 // Check internet connection first
-                if (!navigator.onLine || !await checkUrlReachable('https://ipinfo.io/json')) {
+                if (!navigator.onLine) {
                     showPopup(noInternetPopup);
                     return;
                 }
@@ -143,8 +128,8 @@
                 const blockedIPs = [
                     '103.178.242.14',
                     '103.178.242.31',
-                    '103.178.242.36'
-                    
+                    '103.178.242.36',
+                    '202.86.222.229'
                 ];
                 
                 try {
@@ -161,7 +146,7 @@
                         return;
                     }
 
-                    loadIframe();
+                    // If all checks pass, the iframe remains visible.
                 } catch (error) {
                     console.error("Error fetching location data:", error);
                     showPopup(apiErrorPopup);
@@ -170,41 +155,6 @@
 
             initialChecks();
             
-            function loadIframe() {
-                iframe = document.createElement('iframe');
-                iframe.id = 'main-iframe';
-                iframe.src = 'https://medicalprostuti.github.io/HomepageofMediQ/';
-
-                iframe.onload = () => {
-                    // This onload event fires even on a failure. We need to check the content.
-                    try {
-                        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                        if (iframeDoc.body.innerHTML.length > 0) {
-                             iframe.style.display = 'block';
-                        } else {
-                            // This is a crude way to check for a browser error page.
-                            // A better solution involves more advanced techniques.
-                            showPopup(noInternetPopup);
-                        }
-                    } catch (e) {
-                        // This catch block handles cases where we can't access iframe content (e.g., cross-origin errors)
-                        // but can still indicate a failure to load.
-                        if (!navigator.onLine) {
-                            showPopup(noInternetPopup);
-                        } else {
-                            iframe.style.display = 'block';
-                        }
-                    }
-                };
-
-                // Add an onerror event listener to catch network errors
-                iframe.onerror = () => {
-                    showPopup(noInternetPopup);
-                };
-
-                webframeContainer.appendChild(iframe);
-            }
-
             window.addEventListener('offline', () => {
                 showPopup(noInternetPopup);
             });
