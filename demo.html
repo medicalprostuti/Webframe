@@ -1,109 +1,41 @@
-
 <!DOCTYPE html>
-<html lang="bn">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Subject List</title>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
-    />
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediQ ডেমো অনুশীলন</title>
     <style>
-      body {
-        font-family: "Hind Siliguri", sans-serif;
-        background-color: #f4f4f9;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        margin: 0;
-        padding: 20px;
-      }
-
-      .subject-container {
-        background-color: white;
-        padding: 10px 20px;
-        /* Reduced top/bottom padding from 20px to 10px */
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        width: 100%;
-        max-width: 300px;
-      }
-
-      .subject-heading {
-        font-size: 30px;
-        font-weight: 700;
-        color: #1b0b58;
-        text-align: center;
-        margin-bottom: 10px;
-        /* Reduced from 20px */
-        margin-left: 10px;
-        margin-right: 10px;
-      }
-
-      .subject-list {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .subject-button {
-        background-color: #1b0b58;
-        color: white;
-        border: none;
-        padding: 14px 20px;
-        font-size: 18px;
-        font-weight: 500;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-        text-align: center;
-        text-decoration: none;
-        font-family: "Hind Siliguri", sans-serif;
-      }
-
-      .subject-button:hover {
-        background-color: #2a1a7a;
-        transform: translateY(-2px);
-      }
-
-      .subject-button:active {
-        transform: translateY(0);
-      }
+        /*
+        * A minimal style to ensure the iframe fills the entire viewport.
+        * We remove all default margins, padding, and borders from the body and html elements.
+        */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Prevents scrollbars on the main page */
+        }
+        
+        /* The iframe is styled to fill its parent container, which is the full screen */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none; /* Removes the border around the iframe */
+        }
     </style>
-  </head>
+</head>
+<body>
 
-  <body>
-    <div class="subject-container">
-      <h1 class="subject-heading">বিষয়সমূহ</h1>
-      <div class="subject-list">
-        <a href="https://medicalprostuti.github.io/onubio1/" class="subject-button"
-          >বোটানি</a
-        >
-         <a href="https://medicalprostuti.github.io/onubio2/" class="subject-button"
-          >জুলজি</a
-        >
-        <a href="https://medicalprostuti.github.io/onuchem-1/" class="subject-button"
-          >কেমিস্ট্রি প্রথম পত্র</a
-        >
-        <a href="https://medicalprostuti.github.io/onuchem2/" class="subject-button"
-          >কেমিস্ট্রি দ্বিতীয় পত্র</a
-        >
-        <a href="https://medicalprostuti.github.io/onuphy1/" class="subject-button"
-          >ফিজিক্স প্রথম পত্র</a
-        >
-        <a href="https://medicalprostuti.github.io/onuphy2/" class="subject-button"
-          >ফিজিক্স দ্বিতীয় পত্র</a
-        >
-        <a href="https://medicalprostuti.github.io/onueng/" class="subject-button"
-          >ইংরেজি</a 
-        >
+    <!--
+        The iframe element is the only content in the body,
+        ensuring it is the only thing the user sees.
+    -->
+    <iframe 
+        src="https://medicalprostuti.github.io/demoonushilon/" 
+        title="Medical Prostuti Fullscreen Webframe"
+        allowfullscreen>
+    </iframe>
 
-        <a href="https://medicalprostuti.github.io/onugk/" class="subject-button"
-          >সাধারণ জ্ঞান</a
-        >
-      </div>
-    </div>
-  </body>
+</body>
 </html>
